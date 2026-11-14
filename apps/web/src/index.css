@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #0f766e;
+    --color-accent: #f59e0b;
+  }
+
+  body {
+    @apply bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100;
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-teal-700 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-teal-700 border border-teal-700 px-5 py-2.5 rounded-lg font-medium hover:bg-teal-50 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2;
+  }
+
+  .btn-amber {
+    @apply bg-amber-500 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-amber-600 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500 transition;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .demo-banner {
+    @apply bg-amber-50 border border-amber-200 text-amber-800 text-xs px-3 py-1 rounded-full;
+  }
+}
+
+/* Markdown article styles */
+.prose h1 { @apply text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4; }
+.prose h2 { @apply text-xl font-semibold text-slate-800 dark:text-slate-100 mt-6 mb-3 border-b border-slate-200 dark:border-slate-700 pb-2; }
+.prose h3 { @apply text-lg font-semibold text-slate-800 dark:text-slate-100 mt-5 mb-2; }
+.prose p { @apply text-slate-700 dark:text-slate-300 mb-4 leading-relaxed; }
+.prose ul { @apply list-disc list-inside mb-4 space-y-1 text-slate-700 dark:text-slate-300; }
+.prose ol { @apply list-decimal list-inside mb-4 space-y-1 text-slate-700 dark:text-slate-300; }
+.prose li { @apply ml-4; }
+.prose table { @apply w-full border-collapse mb-4 text-sm; }
+.prose th { @apply bg-slate-100 dark:bg-slate-700 px-4 py-2 text-left font-semibold border border-slate-200 dark:border-slate-600; }
+.prose td { @apply px-4 py-2 border border-slate-200 dark:border-slate-600; }
+.prose code { @apply bg-slate-100 dark:bg-slate-700 px-1 py-0.5 rounded text-sm font-mono; }
+.prose strong { @apply font-semibold text-slate-900 dark:text-white; }
+.prose a { @apply text-teal-600 dark:text-teal-400 underline hover:text-teal-800; }
+.prose blockquote { @apply border-l-4 border-teal-400 pl-4 italic text-slate-600 dark:text-slate-400 my-4; }
+
+/* Star rating */
+.star-filled { color: #f59e0b; }
+.star-empty { color: #d1d5db; }
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  @apply inline-block w-5 h-5 border-2 border-current border-t-transparent rounded-full;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Chat message styles */
+.chat-bubble-user {
+  @apply bg-teal-700 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-xs md:max-w-md;
+}
+.chat-bubble-ai {
+  @apply bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs md:max-w-2xl;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-600 rounded-full; }
