@@ -1,5 +1,5 @@
 import { JSONFilePreset } from 'lowdb/node';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 
 export type DbSchema = {
@@ -115,6 +115,21 @@ export async function getDb(): Promise<Awaited<ReturnType<typeof JSONFilePreset<
     const { Low } = await import('lowdb');
     const { Memory } = await import('lowdb');
     _db = new Low<DbSchema>(new Memory<DbSchema>(), defaultData) as Awaited<ReturnType<typeof JSONFilePreset<DbSchema>>>;
+    await _db.read();
+    return _db;
+  }
+
+  // On Vercel the deployment filesystem is read-only, so serve the bundled
+  // seed data from memory. Writes last only for the life of a warm instance.
+  if (process.env['VERCEL']) {
+    const { Low, Memory } = await import('lowdb');
+    const seedPath = new URL('../data/doorspeaks.json', import.meta.url);
+    const seed = existsSync(seedPath)
+      ? (JSON.parse(readFileSync(seedPath, 'utf8')) as DbSchema)
+      : structuredClone(defaultData);
+    const adapter = new Memory<DbSchema>();
+    await adapter.write(seed);
+    _db = new Low<DbSchema>(adapter, defaultData) as Awaited<ReturnType<typeof JSONFilePreset<DbSchema>>>;
     await _db.read();
     return _db;
   }

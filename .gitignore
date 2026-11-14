@@ -1,1 +1,28 @@
-node_modules
+# Dependencies (installed with `npm install`)
+node_modules/
+
+# Build output
+dist/
+# The shared package's build is committed so the apps can use it without a separate build step
+!packages/shared/dist/
+*.tsbuildinfo
+
+# Environment / secrets (copy apps/api/.env.example to apps/api/.env)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel
+
+# Logs and caches
+*.log
+npm-debug.log*
+.vite/
+coverage/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
